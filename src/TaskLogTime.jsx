@@ -49,12 +49,14 @@ const TaskLogTime = ({ taskId }) => {
         placeholder="Work description"
         className="w-full border p-2 rounded"
       />
-      <button
-        onClick={submitLog}
-        className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700"
-      >
-        Log Time
-      </button>
+      <div dir='rtl'>
+        <button
+          onClick={submitLog}
+          className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
+        >
+          Log Time
+        </button>
+      </div>
     </div>
   );
 };

@@ -49,8 +49,8 @@ const TaskList = () => {
       <ul className="space-y-2">
         {tasks.length ? (
           tasks.map(task => (
-            <li key={task.id} className="bg-gray-800 p-4 rounded shadow border border-gray-600">
-              
+            <li key={task.id} className="bg-gray-800 p-4 rounded shadow border border-gray-600 overflow-hidden">
+              <div>Project: {task.project_name}</div>
               <div className="flex justify-between items-center">
                 <div>
                   <span className="font-semibold">{task.title}</span>
@@ -68,6 +68,7 @@ const TaskList = () => {
                     value={task.status}
                     onChange={(e) => handleStatusChange(task.id, e.target.value)}
                     className="mt-2 bg-gray-700 text-white p-1 rounded border border-gray-500"
+                    disabled={task.status === 'done'}
                   >
                     <option value="todo">To Do</option>
                     <option value="in_progress">In Progress</option>
@@ -79,7 +80,7 @@ const TaskList = () => {
               {openAccordion === task.id && (
                 <div className="mt-4 space-y-4 border-t border-gray-600 pt-4">
                   <TaskComment taskId={task.id} />
-                  <TaskLogTime taskId={task.id} />
+                  {/* <TaskLogTime taskId={task.id} /> */}
                 </div>
               )}
             </li>

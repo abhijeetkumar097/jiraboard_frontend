@@ -31,7 +31,7 @@ const TaskDetails = () => {
       <p className="mb-2"><span className="font-semibold">Due Date:</span> {task.due_date}</p>
       {/* <p className="mb-4"><span className="font-semibold">Assigned To:</span> {task.assigned_to?.username || 'Unassigned'}</p> */}
 
-      <TaskComment taskId={task.id} />
+      {/* <TaskComment taskId={task.id} /> */}
       <TaskLogTime taskId={task.id} />
     </div>
   );
