@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {toast} from 'react-hot-toast';
 
-const TaskComment = ({ taskId }) => {
+const TaskComment = ({ taskId, projectId }) => {
   const [comment, setComment] = useState('');
   const token = sessionStorage.getItem('token');
   const [comments, setComments] = useState([]);

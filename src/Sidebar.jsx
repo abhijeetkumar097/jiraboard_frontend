@@ -1,11 +1,18 @@
 import { Menu, X } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-export default function Sidebar({ open, setOpen }) {
+export default function Sidebar({ open, setOpen, setAuth }) {
   const linkClass = ({ isActive }) =>
     `block px-4 py-2 rounded hover:bg-base-300 transition ${
       isActive ? "bg-base-300 font-semibold" : ""
     }`;
+    
+    const navigate = useNavigate();
+    const logout = () => {
+      sessionStorage.clear();
+      setAuth(false);
+      navigate('/');
+    }
 
   return (
     <div className="flex">
@@ -46,9 +53,9 @@ export default function Sidebar({ open, setOpen }) {
           {/* <NavLink to="/taskboard" className={linkClass}>
             taskboard
           </NavLink> */}
-          <NavLink to="/taskform" className={linkClass}>
+          {/* <NavLink to="/taskform" className={linkClass}>
             TaskForm
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/tasklist" className={linkClass}>
             TaskList
           </NavLink>
@@ -61,6 +68,10 @@ export default function Sidebar({ open, setOpen }) {
           <NavLink to="/overview" className={linkClass}>
             Overview
           </NavLink>
+          <NavLink to="/logs" className={linkClass}>
+            Logs
+          </NavLink>
+          <div className="ml-4"><button className="text-red-700 text-lg rounded" onClick={() => logout()}>Logout</button></div>
         </nav>
       </div>
     </div>

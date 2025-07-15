@@ -13,15 +13,18 @@ import TaskDetails from './TaskDetails';
 import NavbarOUt from './NavbarOut';
 import About from './About';
 import UserOverview from './UserOverview';
+import ProTaskList from './ProTaskList';
+import UserLogs from './UserLogs';
+import KanbanBoard from './KabanBoard';
 
 function App() {
   const [open, setOpen] = useState(true);
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(sessionStorage.getItem('token') ? true : false);
   return (
     <>
     
     
-      {auth ? <Navbar  open={open} setOpen={setOpen} /> : <NavbarOUt />}
+      {auth ? <Navbar  open={open} setOpen={setOpen} setAuth={setAuth}/> : <NavbarOUt />}
       <div className={`transition-all duration-300 ${auth ? (open ? "ml-64" : "ml-10") : ""}`}>
         <Routes>
           {/* Public Routes */}
@@ -38,6 +41,9 @@ function App() {
           <Route path='/teamform' element={auth ? <TeamForm /> : <Navigate to='/' />} />
           <Route path='/task/:taskId' element={auth ? <TaskDetails /> : <Navigate to='/' />} />
           <Route path='/overview' element={auth ? <UserOverview /> : <Navigate to='/' />} />
+          <Route path='/tasks' element={auth ? <ProTaskList /> : <Navigate to='/' />} />
+          <Route path='/logs' element={auth ? <UserLogs /> : <Navigate to='/' />} />
+          <Route path='/board' element={auth ? <KanbanBoard /> : <Navigate to='/' />} />
         </Routes>
       </div>
 

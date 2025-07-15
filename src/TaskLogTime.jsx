@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import toast from 'react-hot-toast';
 const TaskLogTime = ({ taskId }) => {
   const [form, setForm] = useState({
     hours_spent: '',
@@ -21,6 +21,7 @@ const TaskLogTime = ({ taskId }) => {
       alert("Time logged!");
       setForm({ hours_spent: '', description: '', work_date: '' });
     } catch (err) {
+      toast.error("Something went wrong");
       console.error("Log time error:", err.response?.data || err.message);
     }
   };

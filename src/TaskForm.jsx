@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {toast} from 'react-hot-toast';
 const TaskForm = () => {
+  // const location = useLocation();
+  // const p_id = location.state.p_id;
+  const p_id = sessionStorage.getItem('p_id');
+  const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
+  const token = sessionStorage.getItem('token')
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -10,16 +17,11 @@ const TaskForm = () => {
     priority: 'low',
     status: 'todo',
     assigned_to: '',
-    project_id: '',
+    project_id: p_id,
     due_date: '',
     estimated_hours: '',
     story_points: ''
   });
-
-  const [projects, setProjects] = useState([]);
-  const [users, setUsers] = useState([]);
-  const token = sessionStorage.getItem('token')
-  const navigate = useNavigate();
 
   useEffect(() => {
     
@@ -49,8 +51,8 @@ const TaskForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 bg-slate-600 rounded shadow-md max-w-xl mx-auto">
-        <h2>Create Task</h2>
+    <form onSubmit={handleSubmit} className="space-y-4 p-6 border border-slate-500 rounded shadow-md max-w-xl mx-auto">
+        <h2 className='text-xl mb-3'>Create Task</h2>
       <input name="title" value={form.title} onChange={handleChange} placeholder="Title" required className="w-full border border-gray-300 rounded p-2" />
       <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full border border-gray-300 rounded p-2" />
       <input name="work_type" value={form.work_type} onChange={handleChange} placeholder="Work Type" required className="w-full border border-gray-300 rounded p-2" />
@@ -69,10 +71,11 @@ const TaskForm = () => {
         <option value=''>Unassigned</option>
         {users.map(user => <option key={user.id} value={user.id}>{user.username}</option>)}
       </select>
-      <select name="project_id" value={form.project_id} onChange={handleChange} required className="w-full border border-gray-300 rounded p-2">
+      {/* <select name="project_id" value={form.project_id} onChange={handleChange} required className="w-full border border-gray-300 rounded p-2">
         <option value=''>Select Project</option>
         {projects.map(p => <option key={p.id} value={p.id}>{p.project_name}</option>)}
-      </select>
+      </select> */}
+      {/* <input type="text" name="project_id" value={p_id} readOnly hidden/> */}
       <input name="due_date" type="date" value={form.due_date} onChange={handleChange} className="w-full border border-gray-300 rounded p-2" />
       <input name="estimated_hours" type="number" value={form.estimated_hours} onChange={handleChange} placeholder="Estimated Hours" className="w-full border border-gray-300 rounded p-2" />
       <input name="story_points" type="number" value={form.story_points} onChange={handleChange} placeholder="Story Points" className="w-full border border-gray-300 rounded p-2" />

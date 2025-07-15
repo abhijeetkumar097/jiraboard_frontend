@@ -33,8 +33,8 @@ const TeamForm = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 border rounded-2xl shadow-md mt-10">
-      <h2 className="text-2xl font-bold mb-6 text-center">Create Team</h2>
+    <div className="max-w-xl mx-auto p-6 border border-gray-500 rounded shadow-md mt-10">
+      <h2 className="text-2xl mb-6">Create Team</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <label className="block text-sm font-medium">Team Name</label>

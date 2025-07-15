@@ -54,12 +54,13 @@ const ProjectForm = () => {
         <option value="on_hold">On Hold</option>
         <option value="completed">Completed</option>
       </select>
-      <select value={form.teams} onChange={handleTeamSelect} className="w-full border p-2 rounded h-40" multiple>
+      <select value={form.teams} onChange={handleTeamSelect} className="w-full border p-2 rounded">
+        <option value=""  disabled>--Select Team--</option>
         {teams.map((team) => (
           <option key={team.team_id} value={team.team_id}>{team.team_name}</option>
         ))}
       </select>
-      <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create Project</button>
+      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Create Project</button>
     </form>
   );
 };

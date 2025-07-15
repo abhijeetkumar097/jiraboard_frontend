@@ -3,14 +3,17 @@ import axios from 'axios';
 import TaskComment from './TaskComment';
 import TaskLogTime from './TaskLogTime';
 import { toast } from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
 
-const TaskList = () => {
+const ProTaskList = () => {
   const token = sessionStorage.getItem('token');
   const [tasks, setTasks] = useState([]);
   const [openAccordion, setOpenAccordion] = useState(null);
+  const location = useLocation();
+  const p_id = sessionStorage.getItem('p_id');
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/tasks/my-tasks', {
+    axios.get(`http://127.0.0.1:5000/api/tasks/project-tasks/${p_id}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setTasks(res.data))
       .catch(err => {
@@ -30,7 +33,7 @@ const TaskList = () => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    const updated = await axios.get('http://127.0.0.1:5000/api/tasks/my-tasks', {
+    const updated = await axios.get(`http://127.0.0.1:5000/api/tasks/project-tasks/${p_id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setTasks(updated.data);
@@ -45,7 +48,7 @@ const TaskList = () => {
 
   return (
     <div className="p-4 max-w-4xl mx-auto bg-gray-900 text-white">
-      <h2 className="text-xl font-bold mb-4">My Tasks</h2>
+      <h2 className="text-xl font-bold mb-4">Tasks</h2>
       <ul className="space-y-2">
         {tasks.length ? (
           tasks.map(task => (
@@ -93,4 +96,4 @@ const TaskList = () => {
   );
 };
 
-export default TaskList;
+export default ProTaskList;

@@ -5,9 +5,10 @@ import TaskComment from './TaskComment';
 import TaskLogTime from './TaskLogTime';
 
 const TaskBoard = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const token = sessionStorage.getItem('token');
-  const projectId = location.state.p_id;
+  const projectId = sessionStorage.getItem('p_id');
+  // const projectId = location.state.p_id;
   const [board, setBoard] = useState({ todo: [], in_progress: [], in_review: [], done: [] });
 
   useEffect(() => {
